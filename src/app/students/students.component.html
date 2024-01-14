@@ -1,0 +1,357 @@
+<div class="aze">
+  <app-navbar></app-navbar>
+  <router-outlet></router-outlet>
+</div>
+
+<div class="pageContainer">
+  <div class="tableContainer">
+    <p-table
+      class="table"
+      #dt1
+      [paginator]="true"
+      [rows]="5"
+      [rowsPerPageOptions]="[5, 10, 25]"
+      [value]="students"
+      styleClass="p-datatable-striped"
+      [globalFilterFields]="['code', 'name', 'price', 'Quantity']"
+    >
+      <ng-template pTemplate="caption">
+        <h1 style="text-align: center">Profiles Management</h1>
+        <div class="captionContainer">
+          <div class="clearContainer">
+            <button
+              pButton
+              label="Clear"
+              class="p-button-outlined"
+              icon="pi pi-filter-slash"
+              (click)="clear(dt1)"
+            ></button>
+          </div>
+          <div class="inputContainer">
+            <span class="p-input-icon-right">
+              <i class="pi pi-search searchIcon"></i>
+              <input
+                pInputText
+                type="text"
+                (input)="
+                  dt1.filterGlobal($any($event.target).value, 'contains')
+                "
+                placeholder="Search keyword"
+              />
+            </span>
+          </div>
+          <div class="newAccountContainer">
+            <button
+              pButton
+              label="New account"
+              name="newaccount"
+              class="p-button-outlined"
+              icon="pi pi-plus"
+              (click)="showDialog()"
+            ></button>
+          </div>
+        </div>
+      </ng-template>
+      <ng-template pTemplate="header">
+        <tr>
+          <th pSortableColumn="id">Id</th>
+          <th pSortableColumn="name">
+            Username <p-sortIcon field="name"></p-sortIcon>
+          </th>
+          <th>Email</th>
+          <th>Phone Number</th>
+          <th>Action</th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-student>
+        <tr>
+          <td>{{ student.id }}</td>
+          <td>{{ student.username }}</td>
+          <td>{{ student.mail }}</td>
+          <td>{{ student.phone }}</td>
+          <td class="action">
+            <!-- <i
+              style="color: rgb(183, 137, 226)"
+              class="pi pi-pencil"
+              name="updateaccount"
+              (click)="showUpdateDialog(student)"
+            ></i> -->
+            <i
+              style="color: rgba(237, 44, 44, 0.866)"
+              class="pi pi-trash"
+              name="deleteaccount"
+              (click)="showDeleteDialog(student.id)"
+            ></i>
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
+</div>
+
+<p-dialog
+  class="dialog"
+  header="New Account"
+  [(visible)]="visible"
+  [modal]="true"
+  [draggable]="false"
+  [resizable]="false"
+>
+  <p class="m-0"></p>
+  <form class="formAccount">
+    <div class="p-fluid">
+      <div class="p-field">
+        <label for="name">Username</label>
+        <input
+          id="name"
+          type="text"
+          pInputText
+          [(ngModel)]="student.username"
+          name="name"
+          required
+          autofocus
+        />
+      </div>
+      <div class="p-field">
+        <label for="name">First Name</label>
+        <input
+          id="firstname"
+          type="text"
+          pInputText
+          [(ngModel)]="student.firstName"
+          name="firstname"
+          required
+          autofocus
+        />
+      </div>
+      <div class="p-field">
+        <label for="category">Family Name</label>
+        <input
+          id="familyname"
+          type="text"
+          pInputText
+          [(ngModel)]="student.familyName"
+          name="familyname"
+          required
+          autofocus
+        />
+      </div>
+      <div class="p-field">
+        <label for="category">Phone Number</label>
+        <input
+          id="phone"
+          type="text"
+          pInputText
+          [(ngModel)]="student.phone"
+          name="phone"
+          required
+          autofocus
+        />
+      </div>
+      <div class="p-field">
+        <label for="category">Address</label>
+        <input
+          id="address"
+          type="text"
+          pInputText
+          [(ngModel)]="student.address"
+          name="address"
+          required
+          autofocus
+        />
+      </div>
+      <div class="p-field">
+        <label for="category">Email</label>
+        <input
+          id="mail"
+          type="email"
+          pInputText
+          [(ngModel)]="student.mail"
+          name="mail"
+          required
+          autofocus
+        />
+      </div>
+      <div class="p-field">
+        <label for="category">Password</label>
+        <input
+          id="password"
+          type="password"
+          pInputText
+          [(ngModel)]="student.password"
+          name="password"
+          required
+          autofocus
+        />
+      </div>
+    </div>
+  </form>
+  <p-footer>
+    <button
+      type="button"
+      pButton
+      icon="pi pi-times"
+      label="Cancel"
+      (click)="hideDialog()"
+      class="p-button-text"
+    ></button>
+    <button
+      type="submit"
+      pButton
+      icon="pi pi-check"
+      label="Save"
+      name="saveAccount"
+      (click)="saveAccount()"
+      class="p-button-text"
+    ></button>
+  </p-footer>
+</p-dialog>
+
+<!-- <p-dialog
+  class="dialog"
+  header="Update Account"
+  [(visible)]="visible2"
+  [modal]="true"
+  [draggable]="false"
+  [resizable]="false"
+>
+  <p class="m-0"></p>
+  <form class="formAccount">
+    <div class="p-fluid">
+      <div class="p-field">
+        <label for="name">Username</label>
+        <input
+          id="name"
+          type="text"
+          pInputText
+          [(ngModel)]="student.username"
+          name="name"
+          required
+          autofocus
+        />
+      </div>
+      <div class="p-field">
+        <label for="name">First Name</label>
+        <input
+          id="firstname"
+          type="text"
+          pInputText
+          [(ngModel)]="student.firstName"
+          name="firstname"
+          required
+          autofocus
+        />
+      </div>
+      <div class="p-field">
+        <label for="category">Family Name</label>
+        <input
+          id="familyname"
+          type="text"
+          pInputText
+          [(ngModel)]="student.familyName"
+          name="familyname"
+          required
+          autofocus
+        />
+      </div>
+      <div class="p-field">
+        <label for="category">Phone Number</label>
+        <input
+          id="phone"
+          type="text"
+          pInputText
+          [(ngModel)]="student.phone"
+          name="phone"
+          required
+          autofocus
+        />
+      </div>
+      <div class="p-field">
+        <label for="category">Address</label>
+        <input
+          id="address"
+          type="text"
+          pInputText
+          [(ngModel)]="student.address"
+          name="address"
+          required
+          autofocus
+        />
+      </div>
+      <div class="p-field">
+        <label for="category">Email</label>
+        <input
+          id="mail"
+          type="email"
+          pInputText
+          [(ngModel)]="student.mail"
+          name="mail"
+          required
+          autofocus
+        />
+      </div>
+      <div class="p-field">
+        <label for="category">Password</label>
+        <input
+          id="password"
+          type="password"
+          pInputText
+          [(ngModel)]="student.password"
+          name="password"
+          required
+          autofocus
+        />
+      </div>
+    </div>
+  </form>
+  <p-footer>
+    <button
+      type="button"
+      pButton
+      icon="pi pi-times"
+      label="Cancel"
+      (click)="hideDialog()"
+      class="p-button-text"
+    ></button>
+    <button
+      type="submit"
+      pButton
+      icon="pi pi-check"
+      name="updateAccount"
+      label="Save"
+      (click)="updateAccount()"
+      class="p-button-text"
+    ></button>
+  </p-footer>
+</p-dialog> -->
+
+<p-dialog
+  class="dialog"
+  header="Confirm Deletion"
+  [(visible)]="visible3"
+  [modal]="true"
+  [draggable]="false"
+  [resizable]="false"
+>
+  <p class="m-0">Are you sure ?</p>
+
+  <p-footer>
+    <button
+      type="button"
+      pButton
+      icon="pi pi-times"
+      label="Cancel"
+      (click)="hideDialog()"
+      class="p-button-text"
+    ></button>
+    <button
+      type="submit"
+      pButton
+      icon="pi pi-check"
+      label="Confirm"
+      name="confirmDelete"
+      (click)="deleteAccount()"
+      class="p-button-text"
+    ></button>
+  </p-footer>
+</p-dialog>

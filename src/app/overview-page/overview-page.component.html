@@ -1,0 +1,93 @@
+<!-- <div class="pageContainer">
+  <div class="chartContainer">
+    <div class="chartDoughnut">
+      <h2>Account Overview</h2>
+      <p-chart type="line" [data]="dataLine" [options]="optionsLine"></p-chart>
+    </div>
+    <div class="chartDoughnut">
+      <p-selectButton
+        [options]="stateOptions"
+        [(ngModel)]="value"
+        optionLabel="label"
+        optionValue="value"
+      ></p-selectButton>
+      <h2>{{ value === "off" ? "Monthly Expenses" : "Monthly Income" }}</h2>
+      <p-chart
+        type="doughnut"
+        [data]="value === 'off' ? expensesData : incomeData"
+        [options]="options"
+      ></p-chart>
+    </div>
+  </div>
+
+  <div class="tableContainer">
+    <p-table
+      class="table"
+      #dt1
+      [paginator]="true"
+      [rows]="5"
+      [rowsPerPageOptions]="[5, 10, 25]"
+      [value]="transactions"
+      styleClass="p-datatable-striped"
+      [globalFilterFields]="[
+        'id',
+        'amount',
+        'account.name',
+        'type',
+        'category.name'
+      ]"
+    >
+      <ng-template pTemplate="caption">
+        <div class="flex">
+          <button
+            pButton
+            label="Clear"
+            class="p-button-outlined"
+            icon="pi pi-filter-slash"
+            (click)="clear(dt1)"
+          ></button>
+          <i class="pi pi-search"></i>
+          <input
+            pInputText
+            type="text"
+            (input)="dt1.filterGlobal($any($event.target).value, 'contains')"
+            placeholder="Search keyword"
+          />
+        </div>
+      </ng-template>
+      <ng-template pTemplate="header">
+        <tr>
+          <th pSortableColumn="code">Id</th>
+          <th pSortableColumn="amount">
+            Amount <p-sortIcon field="amount"></p-sortIcon>
+          </th>
+          <th>Category</th>
+          <th pSortableColumn="type">
+            Type <p-sortIcon field="type"></p-sortIcon>
+          </th>
+          <th>Account</th>
+          <th pSortableColumn="date">
+            Date <p-sortIcon field="date"></p-sortIcon>
+          </th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-transactions>
+        <tr>
+          <td>{{ transactions.id }}</td>
+          <td>{{ transactions.amount }}</td>
+          <td>{{ transactions.category.name }}</td>
+          <td>
+            <ng-container *ngIf="transactions.type; else expense">
+              <td>Income</td>
+            </ng-container>
+            <ng-template #expense>
+              <td>Expense</td>
+            </ng-template>
+          </td>
+          <td>{{ transactions.account.name }}</td>
+          <td>{{ transactions.date }}</td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
+</div> -->
