@@ -6,6 +6,7 @@ import { SignupPageComponent } from './signup-page/sign-up.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { ActivityComponent } from './activity/activity.component';
 import { StudentsComponent } from './students/students.component';
+import { ActivitiesComponent } from './activities/activities.component';
 // import { OverviewPageComponent } from './overview-page/overview-page.component';
 // import { AccountPageComponent } from './account-page/account-page.component';
 // import { CategoryPageComponent } from './category-page/category-page.component';
@@ -18,6 +19,7 @@ const routes: Routes = [
   { path: 'navbar', component: NavbarComponent },
   { path: 'activity', component: ActivityComponent },
   { path: 'students', component: StudentsComponent },
+  { path: 'activities', component: ActivitiesComponent },
   // {
   //   path: 'dashboard',
   //   component: DashboardPageComponent,

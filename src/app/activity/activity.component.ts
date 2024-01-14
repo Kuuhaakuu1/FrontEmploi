@@ -21,7 +21,7 @@ export class ActivityComponent {
   ngOnInit() {
     this.httpservice
       .getActivitiesInStudentCalendar(
-        parseInt(localStorage.getItem('currentUser') ?? '') + 1
+        parseInt(localStorage.getItem('currentUser') ?? '') 
       )
       .subscribe((data) => {
         this.activities = data; // Fix: Wrap the data in an array
@@ -47,7 +47,7 @@ export class ActivityComponent {
     });
     this.httpservice
       .addActivityToCalendar(
-        parseInt(localStorage.getItem('currentUser') ?? '') + 1,
+        parseInt(localStorage.getItem('currentUser') ?? '') ,
         parseInt(localStorage.getItem('lastActivityId') ?? '') + 1
       )
       .subscribe((data) => {

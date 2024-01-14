@@ -27,6 +27,7 @@ import { CalendarModule } from 'primeng/calendar';
 import { Activity } from './entitiy/activity';
 import { ActivityComponent } from './activity/activity.component';
 import { StudentsComponent } from './students/students.component';
+import { ActivitiesComponent } from './activities/activities.component';
 // import { ActivityComponent } from './activity/activity.component';
 
 @NgModule({
@@ -38,6 +39,7 @@ import { StudentsComponent } from './students/students.component';
     SignupPageComponent,
     NavbarComponent,
     StudentsComponent,
+    ActivitiesComponent,
     // ActivityComponent,
     // OverviewPageComponent,
     // AccountPageComponent,
