@@ -21,6 +21,12 @@ export class AdminService {
   }
 
   public createActivity(activity: Activity): Observable<Activity> {
+    console.log(localStorage.getItem('lastActivityId'));
+    activity.id = parseInt(localStorage.getItem('lastActivityId') ?? '') + 1;
+    activity.beginDate = new Date(activity.beginDate);
+    activity.endDate = new Date(activity.endDate);
+    console.log(activity.id);
+    console.log(activity);
     return this.http.post<Activity>(this.url + '/activity', activity);
   }
 

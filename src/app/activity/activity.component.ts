@@ -29,13 +29,21 @@ export class ActivityComponent {
       });
     this.httpservice.getAllActivities().subscribe((data) => {
       this.activityId = data;
-      localStorage.setItem('lastActivityId', data.length.toString());
+      console.log(this.activityId[data.length - 1].id.toString());
+      localStorage.setItem(
+        'lastActivityId',
+        this.activityId[data.length - 1].id.toString()
+      );
     });
   }
 
   saveAccount() {
+    console.log(this.activity);
+    console.log('saveAccount');
     this.httpAdminService.createActivity(this.activity).subscribe((data) => {
+      console.log('data', data);
       this.activities.push(data);
+      console.log(data);
     });
     this.httpservice
       .addActivityToCalendar(
@@ -45,6 +53,7 @@ export class ActivityComponent {
       .subscribe((data) => {
         this.activities.push(data);
       });
+    window.location.reload();
     this.visible = false;
     this.visible2 = false;
   }
@@ -58,7 +67,7 @@ export class ActivityComponent {
   visible3: boolean = false;
   deletedId!: number;
   activity = {
-    id: 0,
+    id: parseInt(localStorage.getItem('lastActivityId') ?? ''),
     name: '',
     beginDate: new Date(),
     endDate: new Date(),
